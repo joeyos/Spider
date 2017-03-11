@@ -1,0 +1,13 @@
+1、console: Failed to install '': java.nio.charset.UnsupportedCharsetException: cp0.
+	Run As>Run Configurations,选择第二个页签Arguments,在VM arguments中添加
+		-Dpython.console.encoding=UTF-8即可，然后Apply>Run就行了
+
+2、java用jython.jar调用python脚本，脚本中import了第三方库时，报错：import xxx: no module named xxx.
+	两种解决方法：
+	（1）下载或pip install需要的第三方库，将jython.jar改成jython.zip，并解压缩	，将下载的第三方库（以库名定义的文件夹）放到jython文件夹下的/Lib或/Lib/site-packages下，最后将
+jython文件夹重新打包（注意：打包时不要直接对jython文件夹打包，只打包jython根目录下的所有文件），并改后缀为.jar，配置到java的工程目录中（构建路径）。
+	
+	（2）配置python的系统路径，java解析脚本时会到sys.path中找import的第三方库，只要sys.path中能找到第三方库的文件夹即可。
+
+	注：在java端通过语句：PySystemState sys = Py.getSystemState();
+			System.out.println(sys.path.toString());打印路径信息。
