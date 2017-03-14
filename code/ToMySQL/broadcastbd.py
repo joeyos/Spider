@@ -49,7 +49,7 @@ class XDMymessage:
 
     #     writer.writerow(('消息类型','内容'))
     #     csvRow = []
-        
+
 
 
     #     try:
@@ -101,7 +101,7 @@ class XDMymessage:
             try:
                 with connection.cursor() as cursor:
                     sql = "insert into `broadcast`(`publisher`,`time`,`title`,`content`)values(%s,%s,%s,%s)"
-                    # 使用 execute()  方法执行 SQL 查询 
+                    # 使用 execute()  方法执行 SQL 查询
                     cursor.execute(sql, (e['发布人'].strip(),e['时间'].strip(),e['标题'].strip(),e['内容'].strip()))
                     connection.commit()
             finally:

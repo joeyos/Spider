@@ -41,7 +41,7 @@ class XDspiderStudent:
         s = self.session.post(self.auth_url, data=params, headers=headers)
         s = self.session.get(self.log_url)
 
-     #将爬取的数据存为CSV文件   
+     #将爬取的数据存为CSV文件
     def Store(self):
         grade_page = self.session.get("http://yjsxt.xidian.edu.cn/student/index.jsp")
         bsObj = BeautifulSoup(grade_page.text, "html.parser")
@@ -77,12 +77,12 @@ class XDspiderStudent:
             try:
                 with connection.cursor() as cursor:
                     sql = "insert into `student`(`sno`,`name`,`college`,`enrollmentdate`,`specialty`,`researchdir`,`advisor`)values(%s,%s,%s,%s,%s,%s,%s)"
-                    # 使用 execute()  方法执行 SQL 查询 
+                    # 使用 execute()  方法执行 SQL 查询
                     cursor.execute(sql, (e['学号'].strip(), e['姓名'].strip(),e['培养单位'].strip(), e['入学年月'].strip(), e['专业'].strip(), e['研究方向'].strip(),e['导师'].strip().rstrip('给导师发消息'), ))
                     connection.commit()
             finally:
                 connection.close()
-            
+
 if __name__ == '__main__':
     # 初始化爬虫对象
     xs = XDspiderStudent()
